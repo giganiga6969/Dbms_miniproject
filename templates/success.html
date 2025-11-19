@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Thank you!</h1>
+<p>Your order {% if order_id %}#{{ order_id }} {% endif %}has been placed successfully.</p>
+<div class="actions">
+  <a href="{{ url_for('home') }}" class="btn">Back to Products</a>
+</div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Checkout</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Price</th>
+      <th>Qty</th>
+      <th>Subtotal</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for it in items %}
+    <tr>
+      <td>{{ it.name }}</td>
+      <td>₹ {{ '%.2f'|format(it.price) }}</td>
+      <td>{{ it.quantity }}</td>
+      <td>₹ {{ '%.2f'|format(it.price * it.quantity) }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="3" class="right"><strong>Total</strong></td>
+      <td><strong>₹ {{ '%.2f'|format(total) }}</strong></td>
+    </tr>
+  </tfoot>
+</table>
+<form method="post" class="form">
+  <div class="row">
+    <label for="payment_method">Payment method</label>
+    <select id="payment_method" name="payment_method" required>
+      <option value="cash">Cash</option>
+      <option value="card">Card</option>
+      <option value="upi">UPI</option>
+      <option value="wallet">Wallet</option>
+    </select>
+  </div>
+  <div class="row">
+    <a href="{{ url_for('view_cart') }}" class="btn">Back to Cart</a>
+    <button class="btn primary" type="submit">Place Order</button>
+  </div>
+</form>
+{% endblock %}

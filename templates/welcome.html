@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero">
+  <div class="hero-inner">
+    <h1 class="hero-title">Welcome to <span>Cash &amp; Carry Mart</span></h1>
+    <p class="hero-subtitle">Your one-stop store for fresh groceries, daily essentials, and more. Start by setting up your profile or jump right into browsing products.</p>
+    <div class="hero-actions">
+      <a href="{{ url_for('start') }}" class="btn primary">Start / Profile</a>
+      <a href="{{ url_for('home') }}" class="btn">Browse Products</a>
+    </div>
+  </div>
+</section>
+
+<section class="features grid">
+  <div class="card">
+    <div class="card-header"><strong>Fresh &amp; Affordable</strong><span class="muted">Daily picks</span></div>
+    <div class="card-body">
+      <p>From fruits and vegetables to dairy and grains — quality you can trust at prices you’ll love.</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header"><strong>Live Stock</strong><span class="muted">DBMS enforced</span></div>
+    <div class="card-body">
+      <p>Real-time stock checks with database triggers. If it’s out of stock, it’s shown instantly.</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header"><strong>Fast Checkout</strong><span class="muted">Simple &amp; secure</span></div>
+    <div class="card-body">
+      <p>Add to cart, adjust quantities, and place orders with your preferred payment method.</p>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Products</h1>
+<p class="muted">Browse items and add them to your cart. Out-of-stock items are disabled.</p>
+<div class="grid">
+  {% for p in products %}
+    <div class="card">
+      <div class="card-header">
+        <strong>{{ p.name }}</strong>
+        <span class="muted">{{ p.brand }}</span>
+      </div>
+      <div class="card-body">
+        <div class="price">₹ {{ '%.2f'|format(p.price) }}</div>
+        <div class="meta">Category: {{ p.category }}</div>
+        <div class="meta">In stock: {{ p.stock_qty }}</div>
+        {% if not p.in_stock or p.stock_qty <= 0 %}
+          <div class="badge danger">Out of Stock</div>
+        {% endif %}
+      </div>
+      <div class="card-actions">
+        <form method="post" action="{{ url_for('add_to_cart') }}">
+          <input type="hidden" name="product_id" value="{{ p.product_id }}">
+          {% if not p.in_stock or p.stock_qty <= 0 %}
+            <input type="number" name="quantity" value="1" min="1" class="qty" disabled>
+            <button class="btn" type="submit" disabled>Add to Cart</button>
+          {% else %}
+            <input type="number" name="quantity" value="1" min="1" class="qty">
+            <button class="btn" type="submit">Add to Cart</button>
+          {% endif %}
+        </form>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% if not session.get('customer_id') %}
+  <div class="cta">
+    <a class="btn primary" href="{{ url_for('start') }}">Start shopping (enter your details)</a>
+  </div>
+{% endif %}
+{% endblock %}
